@@ -2,15 +2,28 @@
 import Link from "next/link";
 import React from "react";
 
+const details = [
+  { id: 1, name: "Yash", role: "Senior Developer" },
+  { id: 2, name: "Vaibhav", role: "Backend Developer" },
+  { id: 3, name: "Suresh", role: "Frontend Developer" },
+];
+
 const AboutPage = () => {
   return (
     <div>
-      <Link
-        href="/aboutus/developer"
-        className="font-medium text-blue-800 underline"
-      >
-        Go to the Developer page
-      </Link>
+      <ul>
+        {details.map((item) => (
+          <li key={item.id}>
+            <Link
+              href={`aboutus/${item.id}`}
+              className="font-medium text-blue-800 underline"
+            >
+              {item.name}
+            </Link>
+            <br />
+          </li>
+        ))}
+      </ul>
       <br />
       <Link href="/" className="font-medium text-blue-800 underline">
         Home page

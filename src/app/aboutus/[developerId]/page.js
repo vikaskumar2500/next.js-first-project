@@ -13,7 +13,6 @@ const DeveloperPage = () => {
   const { developerId } = useParams();
 
   const itemDetails = details.find((item) => item.id == developerId);
-  console.log(itemDetails);
   return (
     <div>
       {itemDetails ? (
