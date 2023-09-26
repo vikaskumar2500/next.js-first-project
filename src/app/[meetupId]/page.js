@@ -38,13 +38,11 @@ const MeetupDetails = () => {
   const { meetupId } = useParams();
   const dummyMeetup = dummy_meetups.find((meetup) => meetup.id == meetupId);
   return (
-    <div className="absolute m-20 flex-col justify-between bg-blend-overlay">
-      <h2 className="font-bold">Meetup Details</h2>
-      <div >
-        <h2>{dummyMeetup.title}</h2>
-        <div>{dummyMeetup.description}</div>
-        <div>{dummyMeetup.address}</div>
-      </div>
+    <div className="absolute m-20 flex-col justify-between bg-blend-overlay text-center">
+      <img className="w-80" src={dummyMeetup.image} alt={dummyMeetup.title} />
+      <h2 className="font-bold">{dummyMeetup.title}</h2>
+      <div>{dummyMeetup.address}</div>
+      <div>{dummyMeetup.description}</div>
     </div>
   );
 };
