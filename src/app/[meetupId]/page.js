@@ -1,5 +1,7 @@
-import MeetupList from "../components/meetups/MeetupList";
+"use client";
 import React from "react";
+import { useParams } from "next/navigation";
+import MeetupItem from "../../components/meetups/MeetupItem";
 
 const dummy_meetups = [
   {
@@ -26,14 +28,25 @@ const dummy_meetups = [
   {
     id: "m4",
     title: "A fourth Meetup",
-    image: "https://www.nine.ch/hubfs/2020-08-25%2018.10.41%20small.jpg",
+    image: "",
     address: "Some address 5, 23123 some city",
     description: "This is a fourth meetup",
   },
 ];
 
-const HomePage = () => {
-  return <MeetupList meetups={dummy_meetups} />;
+const MeetupDetails = () => {
+  const { meetupId } = useParams();
+  const dummyMeetup = dummy_meetups.find((meetup) => meetup.id == meetupId);
+  return (
+    <div className="absolute m-20 flex-col justify-between bg-blend-overlay">
+      <h2 className="font-bold">Meetup Details</h2>
+      <div >
+        <h2>{dummyMeetup.title}</h2>
+        <div>{dummyMeetup.description}</div>
+        <div>{dummyMeetup.address}</div>
+      </div>
+    </div>
+  );
 };
 
-export default HomePage;
+export default MeetupDetails;
