@@ -1,7 +1,7 @@
-import MeetupList from "../components/meetups/MeetupList";
 import React from "react";
+import MeetupList from "../components/meetups/MeetupList";
 
-const dummy_meetups = [
+let dummy_meetups = [
   {
     id: "m1",
     title: "A first Meetup",
@@ -32,7 +32,14 @@ const dummy_meetups = [
   },
 ];
 
-const HomePage = () => {
+// this works same as the getStaticProps
+export const getData = async () => {
+  const meetups = dummy_meetups;
+  return meetups;
+};
+
+const HomePage = async () => {
+  const meetups = await getData();
   return <MeetupList meetups={dummy_meetups} />;
 };
 
