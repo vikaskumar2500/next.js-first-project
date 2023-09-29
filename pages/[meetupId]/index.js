@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
-import MeetupList from "../components/meetups/MeetupList";
+import MeetupDetails from "../../components/meetups/MeetupDetails";
+import { useParams } from "next/navigation";
 
 const DUMMY_MEATUPS = [
   {
@@ -36,16 +38,55 @@ const DUMMY_MEATUPS = [
   },
 ];
 
-const HomePage = ({ meetups }) => {
-  return <MeetupList meetups={meetups} />;
+const DetailsPage = ({ meetup }) => {
+  return <MeetupDetails meetup={meetup} />;
 };
 
-export const getStaticProps = async () => {
+export const getStaticPaths = async () => {
+  const paramsIds = DUMMY_MEATUPS.map((meetup) => meetup.id);
+  const paramsPaths = paramsIds.map((id) => ({
+    params: {
+      meetupId: id,
+    },
+  }));
+
+  return {
+    // paths: [
+    //   {
+    //     params: {
+    //       meetupId: "m1",
+    //     },
+    //   },
+    //   {
+    //     params: {
+    //       meetupId: "m2",
+    //     },
+    //   },
+    //   {
+    //     params: {
+    //       meetupId: "m3",
+    //     },
+    //   },
+    //   {
+    //     params: {
+    //       meetupId: "m4",
+    //     },
+    //   },
+    // ],
+
+    fallback: false,
+    paths: paramsPaths,
+  };
+};
+
+export const getStaticProps = async (context) => {
+  const meetupId = context.params.meetupId;
+  const meetup = DUMMY_MEATUPS.find((meetup) => meetup.id === meetupId);
   return {
     props: {
-      meetups: DUMMY_MEATUPS,
+      meetup,
     },
   };
 };
 
-export default HomePage;
+export default DetailsPage;
